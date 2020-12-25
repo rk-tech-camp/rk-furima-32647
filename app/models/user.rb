@@ -8,16 +8,20 @@ class User < ApplicationRecord
          has_many :orders
 
 
+         with_options presence: true do
          
         #  validates :email,inclusion: { in:["@"] }
         #  validates :encrypted_password,  length: { minimum: 6 }
-         validates :password,  format: { with:/\A[a-z0-9]+\z/}
+         
          #validates :, confirmation: true
-         validates :first_name, format: { with: /\A[一-龥]+\z/}
-         validates :last_name, format: { with:/\A[一-龥]+\z/}
-         validates :fname_kana, format: { with: /\p{katakana}/ }
-         validates :lname_kana, format: { with: /\p{katakana}/ }
-         
-         
+         validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/} 
+         validates :last_name, format: { with:/\A[ぁ-んァ-ン一-龥]/}  
+         validates :fname_kana, format: { with: /\A[ァ-ヶー－]+\z/ } 
+         validates :lname_kana, format: { with: /\A[ァ-ヶー－]+\z/ }  
+         validates :birthday 
+         validates :nick_name
+        end
+        validates :password,  format: { with:/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze}
+        validates :password, confirmation: true
 
 end
