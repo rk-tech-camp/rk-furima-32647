@@ -79,6 +79,3 @@ Style/FrozenStringLiteralComment:
 # メソッドパラメータ名の最小文字数を設定
 Naming/MethodParameterName:
  MinNameLength: 1
-Rubocopには、他にも以下のような標準設定がしてあります
-Rubocop	標準設定	備考
-文字列	シング
