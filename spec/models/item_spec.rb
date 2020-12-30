@@ -58,8 +58,10 @@ RSpec.describe Item, type: :model do
       it 'genre_idが空では登録できない' do
         @item.genre_id = nil
         @item.valid?
+       
+
       
-        expect(@item.errors.full_messages).to include("Genre must be other than 0")
+        expect(@item.errors.full_messages).to include("Genre can't be blank", "Genre is not a number")
       end
       
       it 'status_idが空では登録できない' do
@@ -132,6 +134,7 @@ RSpec.describe Item, type: :model do
       it 'genre_idが空では登録できない' do
         @item.genre_id = 0
         @item.valid?
+       
      
         expect(@item.errors.full_messages).to include("Genre must be other than 0")
       end
@@ -160,7 +163,7 @@ RSpec.describe Item, type: :model do
       it 'status_idが空では登録できない' do
         @item.status_id = 0
         @item.valid?
-         binding.pry
+        
         expect(@item.errors.full_messages).to include("Status must be other than 0")
       end
 
