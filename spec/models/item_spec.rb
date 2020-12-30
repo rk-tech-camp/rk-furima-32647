@@ -59,7 +59,7 @@ RSpec.describe Item, type: :model do
         @item.genre_id = nil
         @item.valid?
       
-        expect(@item.errors.full_messages).to include("Genre is not a number")
+        expect(@item.errors.full_messages).to include("Genre must be other than 0")
       end
       
       it 'status_idが空では登録できない' do
@@ -116,17 +116,52 @@ RSpec.describe Item, type: :model do
       end
 
       it 'price は9999999より大きい値では登録できない' do
-        @item.price  = "10000000"
+        @item.price  = 10000000
         @item.valid?
            
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
 
       it 'price は300未満では登録できない' do
-        @item.price  = '0'
+        @item.price  = '299'
         @item.valid?
        
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+
+      it 'genre_idが空では登録できない' do
+        @item.genre_id = 0
+        @item.valid?
+     
+        expect(@item.errors.full_messages).to include("Genre must be other than 0")
+      end
+
+      it 'charge_idが空では登録できない' do
+        @item.charge_id = 0
+        @item.valid?
+       
+        expect(@item.errors.full_messages).to include("Charge must be other than 0")
+      end
+      
+      it 'region_idが空では登録できない' do
+        @item.region_id = 0
+        @item.valid?  
+       
+        expect(@item.errors.full_messages).to include("Region must be other than 0")
+      end
+      
+      it 'shipping_idが空では登録できない' do
+        @item.shipping_id = 0
+        @item.valid? 
+        
+        expect(@item.errors.full_messages).to include("Shipping must be other than 0")
+      end
+      
+      it 'status_idが空では登録できない' do
+        @item.status_id = 0
+        @item.valid?
+         binding.pry
+        expect(@item.errors.full_messages).to include("Status must be other than 0")
       end
 
 
