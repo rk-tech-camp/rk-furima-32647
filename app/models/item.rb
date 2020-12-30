@@ -3,20 +3,38 @@ class Item < ApplicationRecord
 	has_one :order
 	has_one_attached :image
 	
-	extend ActiveHash::Associations::ActiveRecordExtensions
-	belongs_to :genre
-	extend ActiveHash::Associations::ActiveRecordExtensions
-	belongs_to :status
-	extend ActiveHash::Associations::ActiveRecordExtensions
-	belongs_to :charge
-	extend ActiveHash::Associations::ActiveRecordExtensions
-	belongs_to :shipping
-	extend ActiveHash::Associations::ActiveRecordExtensions
-	belongs_to :region
+	with_options  extend ActiveHash::Associations::ActiveRecordExtensions do
+	
+    belongs_to :genre
+	  belongs_to :status
+    belongs_to :charge
+	  belongs_to :shipping
+    belongs_to :region
+	end
 
-	validates :category_id, numericality: { other_than: 0 } 
-	validates :price, :numericality => { :greater_than_or_equal_to => 300 , :less_than_or_equal_to => 9999999}
-	validates :price, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/}
+	 
+
+	 
+
+	
+	
+	with_options presence: true do
+	
+	   validates :item_name 
+	   validates :item_note 
+	   validates :image     
 
 
+		 with_options numericality: { other_than: 0 } do
+	      validates :genre_id 
+	      validates :status_id  
+	      validates :charge_id 
+	      validates :region_id  
+	      validates :shipping_id  
+		 end
+			 
+		  validates :price, :numericality => { :greater_than_or_equal_to => 300 , :less_than_or_equal_to => 9999999}
+	    validates :price, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/}
+
+  end
 end
