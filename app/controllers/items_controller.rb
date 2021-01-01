@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+
+	before_action :move_to_index, except: [:index]
 	
 	def index
 		
@@ -23,14 +25,24 @@ class ItemsController < ApplicationController
 		 
 		
 	end
+	
+	 private
+	
+	  def item_params
+    params.require(:item).permit(:item_name,:item_note,:price,:image ,:genre_id, :status_id, :charge_id, :region_id, :shipping_id ,).merge(user_id: current_user.id)
+	  end
+	
+	  def move_to_index
+      unless user_signed_in?
+       redirect_to action: :index
+		  end
+	  end	
+
+
+
 
 end
 
 
 
-	private
 	
-	def item_params
-    params.require(:item).permit(:item_name,:item_note,:price,:image ,:genre_id, :status_id, :charge_id, :region_id, :shipping_id ,).merge(user_id: current_user.id)
-  end
-
