@@ -31,11 +31,11 @@
     <p class='or-text'>or</p>
     <%= link_to '削除', "#", method: :delete, class:'item-destroy' %>
     
-    <% end %>
+   
 
 
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <% unless user_signed_in? &&  current_user.id == @item.user_id  %>
+    <% elsif user_signed_in? %>
       
       <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
 
@@ -53,13 +53,13 @@
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 
     <div class="item-explain-box">
-      <span><%= %></span>
+      <span><%=@item.item_note %></span>
     </div>
     <table class="detail-table">
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @user.nick_name %></td>
+          <td class="detail-value"><%= @item.user.nick_name %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
@@ -119,7 +119,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href=“#” class=‘another-item’><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href=“#” class=‘another-item’><%= @item.genre.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
