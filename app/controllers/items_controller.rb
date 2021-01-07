@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
-  before_action :authenticate_user!, only: [:edit, :update,:new,:creat],except: [:index,:show]
-	#before_action :move_to_index, except: [:index,:show]
+  before_action :authenticate_user!, only: [:edit, :update,:new,:create]
+	
 	before_action :contributor_confirmation, only: [:edit, :update]
 
 	
@@ -37,12 +37,12 @@ class ItemsController < ApplicationController
 	end
 
 	def edit
-		@item = Item.find(params[:id])
+		
 		
 	end
 
 	def update
-		@item = Item.find(params[:id])
+		
 		if  @item.update(item_params)
 		 
       redirect_to item_path(@item.id)
