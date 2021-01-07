@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
 
-	before_action :move_to_index, except: [:index,:show]
+  before_action :authenticate_user!, only: [:edit, :update]
+	before_action :move_to_index, except: [:index,:show,:edit]
 	before_action :contributor_confirmation, only: [:edit, :update]
+
 	
 	
 	def index
@@ -69,7 +71,8 @@ class ItemsController < ApplicationController
 			@item = Item.find(params[:id])
 			redirect_to root_path unless current_user == @item.user
 		end
-
+		
+		
 
 
 
