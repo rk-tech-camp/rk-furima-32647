@@ -1,35 +1,28 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!,except: [:index, :show]
-	
 	before_action :contributor_confirmation, only: [:edit, :update]
 
-	
-	
 	def index
-		
 		@items = Item.includes(:user).order("created_at DESC")
-	end
+	end	
+	
 
 	def new
 		@item = Item.new
-		
+	end	
 
 		
-	end
-
 	def create
-		 @item = Item.new(item_params)
-		 if @item.save
-			redirect_to root_path
-		else  
-			render :new
+	 @item = Item.new(item_params)
+	 if @item.save
+		redirect_to root_path
+	 else  
+		render :new
 		end		
+  end
+		
 
-		
-		 
-		
-	end
 
 	def show
 		@item = Item.find(params[:id])
@@ -38,8 +31,8 @@ class ItemsController < ApplicationController
 
 	def edit
 		
-		
-	end
+	end	
+
 
 	def update
 		
@@ -50,11 +43,9 @@ class ItemsController < ApplicationController
       render :edit
     end
 
+	end
 
 		
-	end
-	
-	 
 	private
 	
 	  def item_params
@@ -68,12 +59,4 @@ class ItemsController < ApplicationController
 			redirect_to root_path unless current_user == @item.user
 		end
 		
-		
-
-
-
-end
-
-
-
-	
+end	
