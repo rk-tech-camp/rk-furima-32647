@@ -6,171 +6,138 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品の出品' do
-
-    context "商品の保存ができる場合" do
-      
-
-
-      it "記入欄全てが存在すれば録できる" do
+    context '商品の保存ができる場合' do
+      it '記入欄全てが存在すれば録できる' do
         expect(@item).to be_valid
-        
-        
-       
-
-
       end
-      
     end
 
-
-    context "商品の保存ができない場合" do
-
-      it "画像がないと保存できない" do
-        
+    context '商品の保存ができない場合' do
+      it '画像がないと保存できない' do
         @item.image = nil
         @item.valid?
-        
 
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
 
-      end     
-
-      it "item_nameがないと保存できない" do
-        
-        @item.item_name = ""
+      it 'item_nameがないと保存できない' do
+        @item.item_name = ''
         @item.valid?
-       
-        
 
         expect(@item.errors.full_messages).to include("Item name can't be blank")
-      end  
-
-      it "item_noteがないと保存できない" do
-        
-          @item.item_note= ""
-          @item.valid?
-          
-  
-          expect(@item.errors.full_messages).to include("Item note can't be blank")
       end
-      
-      
+
+      it 'item_noteがないと保存できない' do
+        @item.item_note = ''
+        @item.valid?
+
+        expect(@item.errors.full_messages).to include("Item note can't be blank")
+      end
+
       it 'genre_idが空では登録できない' do
         @item.genre_id = nil
         @item.valid?
-       
 
-      
-        expect(@item.errors.full_messages).to include("Genre can't be blank", "Genre is not a number")
+        expect(@item.errors.full_messages).to include("Genre can't be blank", 'Genre is not a number')
       end
-      
+
       it 'status_idが空では登録できない' do
         @item.status_id = nil
         @item.valid?
- 
-        expect(@item.errors.full_messages).to include("Status is not a number")
+
+        expect(@item.errors.full_messages).to include('Status is not a number')
       end
-      
+
       it 'shippingが空では登録できない' do
-        @item.shipping_id= nil
+        @item.shipping_id = nil
         @item.valid?
-      
-     
-        expect(@item.errors.full_messages).to include("Shipping is not a number")
+
+        expect(@item.errors.full_messages).to include('Shipping is not a number')
       end
-      
-      
+
       it 'chargeが空では登録できない' do
         @item.charge_id = nil
-        @item.valid? 
-        
-         expect(@item.errors.full_messages).to include("Charge is not a number")
+        @item.valid?
+
+        expect(@item.errors.full_messages).to include('Charge is not a number')
       end
 
-      
-
       it 'region が空では登録できない' do
-        @item.region_id  = nil
+        @item.region_id = nil
         @item.valid?
-       
-        expect(@item.errors.full_messages).to include("Region is not a number")
+
+        expect(@item.errors.full_messages).to include('Region is not a number')
       end
 
       it 'price は全角（数字）で入力しないと登録できない' do
-        @item.price  = '１００'
+        @item.price = '１００'
         @item.valid?
-          
-        expect(@item.errors.full_messages).to include("Price is not a number")
+
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'price が空では登録できない' do
-        @item.price  = ''
+        @item.price = ''
         @item.valid?
-        
-        expect(@item.errors.full_messages).to include("Price is not a number")
+
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'price は0では登録できない' do
-        @item.price  = '0'
+        @item.price = '0'
         @item.valid?
-   
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'price は9999999より大きい値では登録できない' do
-        @item.price  = 10000000
+        @item.price = 10_000_000
         @item.valid?
-           
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
       it 'price は300未満では登録できない' do
-        @item.price  = '299'
+        @item.price = '299'
         @item.valid?
-       
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'genre_idが空では登録できない' do
         @item.genre_id = 0
         @item.valid?
-       
-     
-        expect(@item.errors.full_messages).to include("Genre must be other than 0")
+
+        expect(@item.errors.full_messages).to include('Genre must be other than 0')
       end
 
       it 'charge_idが空では登録できない' do
         @item.charge_id = 0
         @item.valid?
-       
-        expect(@item.errors.full_messages).to include("Charge must be other than 0")
+
+        expect(@item.errors.full_messages).to include('Charge must be other than 0')
       end
-      
+
       it 'region_idが空では登録できない' do
         @item.region_id = 0
-        @item.valid?  
-       
-        expect(@item.errors.full_messages).to include("Region must be other than 0")
+        @item.valid?
+
+        expect(@item.errors.full_messages).to include('Region must be other than 0')
       end
-      
+
       it 'shipping_idが空では登録できない' do
         @item.shipping_id = 0
-        @item.valid? 
-        
-        expect(@item.errors.full_messages).to include("Shipping must be other than 0")
+        @item.valid?
+
+        expect(@item.errors.full_messages).to include('Shipping must be other than 0')
       end
-      
+
       it 'status_idが空では登録できない' do
         @item.status_id = 0
         @item.valid?
-        
-        expect(@item.errors.full_messages).to include("Status must be other than 0")
+
+        expect(@item.errors.full_messages).to include('Status must be other than 0')
       end
-
-
-      
-        
     end
   end
-  
 end
