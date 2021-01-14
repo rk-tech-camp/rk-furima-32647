@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   root to:"items#index"
 
   resources :items do
-    resources :orders do
-      resources :addresses
-    end  
+    resources :orders 
+    
+    
   end
 end

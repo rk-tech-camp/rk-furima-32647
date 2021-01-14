@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :contributor_confirmation
+  before_action :set_item
 
   def index
     @item = Item.find(params[:item_id])
@@ -30,6 +31,11 @@ class OrdersController < ApplicationController
     params.require(:order_address).permit(:postal, :region_id, :city, :number, :build, :phone).merge(
       item_id: params[:item_id], user_id: current_user.id, token: params[:token]
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+    
   end
 
   def pay_item
