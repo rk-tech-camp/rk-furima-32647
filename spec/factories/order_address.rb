@@ -5,9 +5,10 @@ FactoryBot.define do
     city       { 'さいたま' }
     build      { 'ビル' }
     number     { '1-1' }
-    phone      { 11_111_111_111 }
+    phone      { '09012345678' }
     token      { 'tok_abcdefghijk00000000000000000' }
-    user_id    { 1 }
-    item_id    { 1 }
+    association :user
+    association :item
+  
   end
 end

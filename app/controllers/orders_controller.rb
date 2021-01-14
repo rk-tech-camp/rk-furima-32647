@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :contributor_confirmation
   before_action :set_item
+  before_action :contributor_confirmation
 
   def index
-    @item = Item.find(params[:item_id])
+  
 
     redirect_to root_path unless @item.order.nil?
 
@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
+   
     @order_address = OrderAddress.new(order_address_params)
     if @order_address.valid?
 
@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
   end
 
   def contributor_confirmation
-    @item = Item.find(params[:item_id])
+    
      if current_user == @item.user
         redirect_to root_path 
      end  
