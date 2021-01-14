@@ -37,7 +37,7 @@
 
 
     
-    <% elsif user_signed_in? %>
+    <% elsif user_signed_in? && @item.order == nil %>
        <%= link_to '購入画面に進む',  item_orders_path(@item) ,method: :get,   class:"item-red-btn"%>
       
      
