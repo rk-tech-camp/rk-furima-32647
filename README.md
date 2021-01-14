@@ -35,8 +35,8 @@
 | status_id     | integer| null: false |
 | charge_id     | integer| null: false |
 | region_id     | integer| null: false |
-| date_id       | integer| null: false |
-| category_id   | integer| null: false |
+| shipping_id   | integer| null: false |
+| genre_id      | integer| null: false |
 | user          | references | foreign_key|
              
 
@@ -77,3 +77,4 @@
 | phone    | string     |   null: false |                             
 | order    | references |foreign_key:true |
  
+- belongs_to :oder
